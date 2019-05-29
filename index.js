@@ -24,78 +24,98 @@ var Sortinputbox = document.createElement('input')
 var SortInputDescription = document.createElement('span')
 var SortGo = document.createElement('button')
 var SortReset = document.createElement('button')
+var linebreak0 = document.createElement('br')
+var linebreak1 = document.createElement('br')
 
 //elemets
 
 SortReset.textContent = 'Reset'
-SortReset.style.width = '50px'
-SortReset.style.height = '30px'
+SortReset.style.width = '150px'
+SortReset.style.height = '50px'
 SortReset.style.padding = '0px'
 SortReset.style.marginBottom = '0px'
 SortReset.style.marginLeft = '10px'
+SortReset.style.marginTop = '30px'
 SortReset.style.border = '1.5px solid rgb(177, 180, 2)'
 SortReset.style.borderRadius = '5px'
-SortReset.style.fontSize = '10px'
+SortReset.style.fontSize = '20px'
 SortReset.style.backgroundColor = 'rgb(226, 230, 4)'
 SortReset.style.position = 'relative'
 SortReset.style.bottom = '3.5px'
 SortReset.onclick = function () {
-    var ibd = document.getElementById('inputboxdiv')
-    var arr = document.getElementById('array')
-    main.removeChild(ibd)
-    main.removeChild(arr)
-    SortGo.removeAttribute('disabled')
+
+    try {
+        var ibd = document.getElementById('inputboxdiv')
+        var arr = document.getElementById('array')
+        main.removeChild(ibd)
+        main.removeChild(arr)
+        SortGo.removeAttribute('disabled')
+    } catch (err) {
+        alert("There is no item to reset")
+        SortGo.removeAttribute('disabled')
+    }
+   
 }
 //space
 SortGo.textContent = 'Go'
-SortGo.style.width = '40px'
-SortGo.style.height = '30px'
+SortGo.id = 'gobtn'
+SortGo.style.width = '150px'
+SortGo.style.height = '50px'
 SortGo.style.padding = '0px'
 SortGo.style.marginBottom = '0px'
+SortGo.style.marginTop = '30px'
 SortGo.style.border = '1.5px solid rgb(31, 170, 3)'
 SortGo.style.borderRadius = '5px'
-SortGo.style.fontSize = '10px'
+SortGo.style.fontSize = '20px'
 SortGo.style.position = 'relative'
 SortGo.style.backgroundColor = ' rgb(41, 230, 4)'
 SortGo.style.bottom = '3.5px'
 SortGo.onclick = function () {
 
-    // if (l == 0) {
-    //    console.log('nothing')
-    // }else{
-    //     console.log('happens')
-    // }
-
+    ib = 0
     var sN = document.getElementById('SortNumber').value
     ib = sN
-    SortGo.disabled = 'true'
-    createInputBox(ib)
+
+    if (ib == 0 || ib == null) {
+       alert('You have to input a number to perform this operation')
+    }else{
+        SortGo.disabled = 'true'
+        createInputBox(ib)
+    }
+
+    
+    
 
 }
 //space
 SortInputDescription.textContent = 'How many numbers do you want to sort: '
+
 //space
 Sortinputbox.id = 'SortNumber'
 Sortinputbox.type = 'text'
-Sortinputbox.style.width = '40px'
-Sortinputbox.style.height = '30px'
+Sortinputbox.style.width = '60px'
+Sortinputbox.style.height = '50px'
 Sortinputbox.style.marginLeft = '10px'
 Sortinputbox.style.marginRight = '10px'
-Sortinputbox.style.fontSize = '20px'
+Sortinputbox.style.fontSize = '28px'
 Sortinputbox.style.padding = '0px 10px'
 Sortinputbox.style.border = '1px solid #a0a0a0'
 Sortinputbox.style.borderRadius = '3px'
 Sortinputbox.style.boxSizing = 'border-box'
 Sortinputbox.maxLength = '3'
+
 selectNoOfSort.appendChild(SortInputDescription)
 selectNoOfSort.appendChild(Sortinputbox)
+selectNoOfSort.appendChild(linebreak0)
 selectNoOfSort.appendChild(SortGo)
 selectNoOfSort.appendChild(SortReset)
+
 main.appendChild(selectNoOfSort)
 
 
 
 function getAllInputs() {
+
     var someArray = []
     for (let i = 0; i < ib; i++) {
         var inputids = 'input' + i
@@ -107,7 +127,7 @@ function getAllInputs() {
 
 function createInputBox(input_number) {
     var inputdiv = document.createElement('div')
-    inputdiv.style.margin = '0px'
+    inputdiv.style.marginTop = '20px'
     inputdiv.style.padding = '0px'
     inputdiv.id = 'inputboxdiv'
 
@@ -116,13 +136,15 @@ function createInputBox(input_number) {
 
         var inputbox = document.createElement('input')
         inputbox.id = 'input' + i
+        inputbox.placeholder = 'No.' + (i + 1)
         inputbox.type = 'text'
-        inputbox.style.width = '40px'
-        inputbox.style.height = '30px'
+        inputbox.style.width = '70px'
+        inputbox.style.height = '50px'
         inputbox.style.marginLeft = '10px'
         inputbox.style.marginRight = '10px'
-        inputbox.style.fontSize = '20px'
-        inputbox.style.padding = '0px 0px'
+        inputbox.style.fontSize = '22px'
+        inputbox.style.paddingLeft = '10px'
+        inputbox.style.paddingRight = '10px'
         inputbox.style.border = '1px solid #a0a0a0'
         inputbox.style.borderRadius = '3px'
         inputbox.style.boxSizing = 'border-box'
@@ -133,18 +155,42 @@ function createInputBox(input_number) {
 
     var btn = document.createElement('button')
     btn.textContent = 'SORT'
-    btn.style.width = '40px'
-    btn.style.height = '30px'
+    btn.style.width = '80px'
+    btn.style.height = '50px'
     btn.style.padding = '0px'
     btn.style.marginBottom = '0px'
     btn.style.border = '1px solid #a0a0a0'
     btn.style.borderRadius = '5px'
-    btn.style.fontSize = '10px'
+    btn.style.fontSize = '24px'
+    btn.style.fontWeight = 'bold'
     btn.style.position = 'relative'
-    btn.style.bottom = '3.5px'
+    btn.style.bottom = '2px'
     btn.onclick = function () {
+
+
         array = getAllInputs()
-        sortedBoxes();
+        var flag = false; 
+
+        for (let arrayitem = 0; arrayitem < array.length; arrayitem++) {
+            var tempItem = array[arrayitem]
+            
+
+            if (tempItem.length == 0) {
+               flag = false;
+               break;
+            }else{
+                flag =true;
+            }
+            
+        }
+
+        if (flag == true) {
+            sortedBoxes()
+        }else{
+            alert('Some boxes dont have numbers. Please Fill them')
+        }
+        
+        
     }
     inputdiv.appendChild(btn)
     main.appendChild(inputdiv) //append div here
